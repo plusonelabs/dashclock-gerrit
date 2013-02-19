@@ -1,0 +1,12 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <ListPreference
+        android:defaultValue="display_scope_all"
+        android:dialogTitle="@string/settings_display_scope_dialog_title"
+        android:entries="@array/settings_display_scope_entries"
+        android:entryValues="@array/settings_display_scope_values"
+        android:key="display_scope"
+        android:summary="@string/settings_display_scope_summary"
+        android:title="@string/settings_display_scope_title" />
+
+</PreferenceScreen>

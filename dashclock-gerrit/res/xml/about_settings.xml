@@ -1,0 +1,42 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/settings_about_category_contact_title" >
+        <Preference
+            android:summary="@string/settings_about_github_summary"
+            android:title="@string/settings_about_github_title" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/plusonelabs/dashclock-gerrit" />
+        </Preference>
+        <Preference
+            android:summary="@string/settings_about_play_store_desc"
+            android:title="@string/settings_about_play_store_title" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://play.google.com/store/apps/details?id=com.plusonelabs.dashclock.gerrit" />
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/settings_about_category_libraries_title" >
+        <Preference android:title="@string/settings_about_library_dashclock_title" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="http://code.google.com/p/dashclock/" />
+        </Preference>
+        <Preference android:title="@string/settings_about_library_http_request_title" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/kevinsawicki/http-request" />
+        </Preference>
+        <Preference android:title="@string/settings_about_library_gson_title" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="http://code.google.com/p/google-gson/" />
+        </Preference>
+        <Preference android:title="@string/settings_about_library_encrypted_prefs_title" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/sveinungkb/encrypted-userprefs" />
+        </Preference>
+    </PreferenceCategory>
+
+</PreferenceScreen>

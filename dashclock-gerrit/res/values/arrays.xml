@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="settings_display_scope_entries">
+        <item>All open changes</item>
+        <item>Changes assigned to me</item>
+    </string-array>
+    <string-array name="settings_display_scope_values">
+        <item>display_scope_all</item>
+        <item>display_scope_assigned</item>
+    </string-array>
+
+</resources>
