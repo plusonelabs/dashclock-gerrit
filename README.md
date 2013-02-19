@@ -4,7 +4,7 @@ An extension to the dashclock android widget adding support for the gerrit code 
 
 The extensions allows you to monitor all open changes and changes assigned to you.
 
-!https://github.com/plusonelabs/dashclock-gerrit/raw/master/assets/screenshots/dashclock-gerrit-device.png!
+![Screenshots of gerrit extension for dashclock](https://github.com/plusonelabs/dashclock-gerrit/raw/master/assets/screenshots/dashclock-gerrit-device.png)
 
 ## Collaboration
 
