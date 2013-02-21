@@ -1,7 +1,7 @@
-package com.plusonalabs.dashclock.gerrit;
+package com.plusonelabs.dashclock.gerrit;
 
-import static com.plusonalabs.dashclock.gerrit.util.ParamCheck.*;
-import static com.plusonalabs.dashclock.gerrit.util.UrlUtil.*;
+import static com.plusonelabs.dashclock.gerrit.util.ParamCheck.*;
+import static com.plusonelabs.dashclock.gerrit.util.UrlUtil.*;
 import static java.util.Collections.*;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.plusonalabs.dashclock.gerrit.auth.AuthenticationProvider;
+import com.plusonelabs.dashclock.gerrit.auth.AuthenticationProvider;
 
 public class Gerrit {
 

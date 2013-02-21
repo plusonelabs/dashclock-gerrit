@@ -1,8 +1,8 @@
-package com.plusonalabs.dashclock.gerrit;
+package com.plusonelabs.dashclock.gerrit;
 
 import static android.content.Intent.*;
-import static com.plusonalabs.dashclock.gerrit.prefs.GerritPreferences.*;
-import static com.plusonalabs.dashclock.gerrit.util.UrlUtil.*;
+import static com.plusonelabs.dashclock.gerrit.prefs.GerritPreferences.*;
+import static com.plusonelabs.dashclock.gerrit.util.UrlUtil.*;
 
 import java.util.List;
 
@@ -14,10 +14,12 @@ import android.util.Log;
 
 import com.google.android.apps.dashclock.api.DashClockExtension;
 import com.google.android.apps.dashclock.api.ExtensionData;
-import com.plusonalabs.dashclock.gerrit.auth.AnonymousAuthenticationProvider;
-import com.plusonalabs.dashclock.gerrit.auth.AuthenticationProvider;
-import com.plusonalabs.dashclock.gerrit.auth.BasicAuthWithCookieAuthenticationProvider;
-import com.plusonalabs.dashclock.gerrit.prefs.GerritPreferences;
+import com.plusonelabs.dashclock.gerrit.BuildConfig;
+import com.plusonelabs.dashclock.gerrit.R;
+import com.plusonelabs.dashclock.gerrit.auth.AnonymousAuthenticationProvider;
+import com.plusonelabs.dashclock.gerrit.auth.AuthenticationProvider;
+import com.plusonelabs.dashclock.gerrit.auth.BasicAuthWithCookieAuthenticationProvider;
+import com.plusonelabs.dashclock.gerrit.prefs.GerritPreferences;
 
 public class GerritDashClockExtension extends DashClockExtension {
 

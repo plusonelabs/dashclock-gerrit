@@ -1,4 +1,4 @@
-package com.plusonalabs.dashclock.gerrit.util;
+package com.plusonelabs.dashclock.gerrit.util;
 
 public class UrlUtil {
 

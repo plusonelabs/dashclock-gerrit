@@ -1,9 +1,9 @@
-package com.plusonalabs.dashclock.gerrit.prefs;
+package com.plusonelabs.dashclock.gerrit.prefs;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 
-import com.plusonalabs.dashclock.gerrit.R;
+import com.plusonelabs.dashclock.gerrit.R;
 
 public class DisplayFragment extends PreferenceFragment {
 

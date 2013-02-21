@@ -1,15 +1,15 @@
 <preference-headers xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <header
-        android:fragment="com.plusonalabs.dashclock.gerrit.prefs.ServerFragment"
+        android:fragment="com.plusonelabs.dashclock.gerrit.prefs.ServerFragment"
         android:summary="@string/settings_server_summary"
         android:title="@string/settings_server" />
     <header
-        android:fragment="com.plusonalabs.dashclock.gerrit.prefs.DisplayFragment"
+        android:fragment="com.plusonelabs.dashclock.gerrit.prefs.DisplayFragment"
         android:summary="@string/settings_display_summary"
         android:title="@string/settings_display" />
     <header
-        android:fragment="com.plusonalabs.dashclock.gerrit.prefs.AboutFragment"
+        android:fragment="com.plusonelabs.dashclock.gerrit.prefs.AboutFragment"
         android:summary="@string/settings_about_summary"
         android:title="@string/settings_about" />
 

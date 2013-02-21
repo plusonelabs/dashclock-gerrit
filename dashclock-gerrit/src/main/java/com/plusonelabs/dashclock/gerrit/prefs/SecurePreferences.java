@@ -22,7 +22,7 @@
 
  */
 
-package com.plusonalabs.dashclock.gerrit.prefs;
+package com.plusonelabs.dashclock.gerrit.prefs;
 
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;

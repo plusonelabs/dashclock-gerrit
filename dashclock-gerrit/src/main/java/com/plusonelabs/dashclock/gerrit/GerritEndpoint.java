@@ -1,8 +1,8 @@
-package com.plusonalabs.dashclock.gerrit;
+package com.plusonelabs.dashclock.gerrit;
 
-import static com.plusonalabs.dashclock.gerrit.prefs.GerritPreferences.*;
+import static com.plusonelabs.dashclock.gerrit.prefs.GerritPreferences.*;
 
-import com.plusonalabs.dashclock.gerrit.prefs.SecurePreferences;
+import com.plusonelabs.dashclock.gerrit.prefs.SecurePreferences;
 
 public class GerritEndpoint {
 

@@ -1,7 +1,7 @@
-package com.plusonalabs.dashclock.gerrit.auth;
+package com.plusonelabs.dashclock.gerrit.auth;
 
 import com.github.kevinsawicki.http.HttpRequest;
-import com.plusonalabs.dashclock.gerrit.GerritEndpoint;
+import com.plusonelabs.dashclock.gerrit.GerritEndpoint;
 
 public class AnonymousAuthenticationProvider implements AuthenticationProvider {
 

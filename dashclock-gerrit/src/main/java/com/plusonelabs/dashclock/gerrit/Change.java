@@ -1,4 +1,4 @@
-package com.plusonalabs.dashclock.gerrit;
+package com.plusonelabs.dashclock.gerrit;
 
 public class Change {
 

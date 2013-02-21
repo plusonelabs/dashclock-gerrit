@@ -1,13 +1,13 @@
-package com.plusonalabs.dashclock.gerrit.auth;
+package com.plusonelabs.dashclock.gerrit.auth;
 
-import static com.plusonalabs.dashclock.gerrit.util.UrlUtil.*;
+import static com.plusonelabs.dashclock.gerrit.util.UrlUtil.*;
 
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
 
 import com.github.kevinsawicki.http.HttpRequest;
-import com.plusonalabs.dashclock.gerrit.GerritEndpoint;
+import com.plusonelabs.dashclock.gerrit.GerritEndpoint;
 
 public class BasicAuthWithCookieAuthenticationProvider implements AuthenticationProvider {
 
