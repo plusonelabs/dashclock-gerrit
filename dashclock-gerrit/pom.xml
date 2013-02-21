@@ -6,9 +6,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.plusonalabs.dashclock-gerrit</groupId>
 	<artifactId>dashclock-gerrit</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>apk</packaging>
 	<name>dashclock-gerrit</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -31,8 +35,6 @@
 			<groupId>com.google.android.apps.dashclock.api</groupId>
 			<artifactId>dashclock.api</artifactId>
 			<version>1.1</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/dashclock-api-r1.1.jar</systemPath>
 		</dependency>
 	</dependencies>
 
@@ -46,6 +48,7 @@
 					<androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
 					<assetsDirectory>${project.basedir}/assets</assetsDirectory>
 					<resourceDirectory>${project.basedir}/res</resourceDirectory>
+					<nativeLibrariesDirectory>${project.basedir}/src/main/native</nativeLibrariesDirectory>
 					<sdk>
 						<platform>17</platform>
 					</sdk>
@@ -56,7 +59,7 @@
 
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>3.0</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
@@ -64,4 +67,91 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>release</id>
+			<!-- via this activation the profile is automatically used when the release 
+				is done with the maven release plugin -->
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-jarsigner-plugin</artifactId>
+						<executions>
+
+							<execution>
+
+								<id>signing</id>
+								<goals>
+									<goal>sign</goal>
+									<goal>verify</goal>
+								</goals>
+								<phase>package</phase>
+								<inherited>true</inherited>
+								<configuration>
+									<archiveDirectory />
+									<includes>
+										<include>${project.build.directory}/${project.artifactId}-${project.version}.apk</include>
+									</includes>
+									<keystore>${sign.keystore}</keystore>
+									<alias>${sign.alias}</alias>
+									<storepass>${sign.storepass}</storepass>
+									<keypass>${sign.keypass}</keypass>
+									<verbose>true</verbose>
+									<arguments>
+										<argument>-sigalg</argument>
+										<argument>MD5withRSA</argument>
+										<argument>-digestalg</argument>
+										<argument>SHA1</argument>
+									</arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- the signed apk then needs to be zipaligned and we activate proguard 
+						and we run the manifest update -->
+					<plugin>
+						<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+						<artifactId>android-maven-plugin</artifactId>
+						<inherited>true</inherited>
+						<configuration>
+							<sign>
+								<debug>false</debug>
+							</sign>
+							<zipalign>
+								<skip>false</skip>
+								<verbose>true</verbose>
+								<inputApk>${project.build.directory}/${project.artifactId}-${project.version}.apk</inputApk>
+								<outputApk>${project.build.directory}/${project.artifactId}-${project.version}-signed-aligned.apk
+								</outputApk>
+							</zipalign>
+							<manifest>
+								<debuggable>false</debuggable>
+								<versionCodeAutoIncrement>true</versionCodeAutoIncrement>
+							</manifest>
+							<proguard>
+								<skip>true</skip>
+							</proguard>
+						</configuration>
+						<executions>
+							<execution>
+								<id>alignApk</id>
+								<phase>package</phase>
+								<goals>
+									<goal>zipalign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
