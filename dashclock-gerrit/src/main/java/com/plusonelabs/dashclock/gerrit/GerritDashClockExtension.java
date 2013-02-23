@@ -14,8 +14,6 @@ import android.util.Log;
 
 import com.google.android.apps.dashclock.api.DashClockExtension;
 import com.google.android.apps.dashclock.api.ExtensionData;
-import com.plusonelabs.dashclock.gerrit.BuildConfig;
-import com.plusonelabs.dashclock.gerrit.R;
 import com.plusonelabs.dashclock.gerrit.auth.AnonymousAuthenticationProvider;
 import com.plusonelabs.dashclock.gerrit.auth.AuthenticationProvider;
 import com.plusonelabs.dashclock.gerrit.auth.BasicAuthWithCookieAuthenticationProvider;
@@ -109,12 +107,12 @@ public class GerritDashClockExtension extends DashClockExtension {
 	}
 
 	private void setClickIntent(List<Change> changes, ExtensionData extensionData) {
+		String changeUrl = endpoint.getUrl();
 		if (changes.size() == 1) {
-			int changeId = changes.get(0).getChangeId();
-			String changeUrl = appendPath(endpoint.getUrl(), "/#/c/" + changeId + "/");
-			extensionData.clickIntent(new Intent(ACTION_VIEW, Uri.parse(changeUrl)));
+			changeUrl = appendPath(changeUrl, "/#/c/" + changes.get(0).getChangeId() + "/");
 		} else {
-			extensionData.clickIntent(new Intent(ACTION_VIEW, Uri.parse(endpoint.getUrl())));
+			changeUrl = appendPath(changeUrl, "/#/q/status:open,n,z");
 		}
+		extensionData.clickIntent(new Intent(ACTION_VIEW, Uri.parse(changeUrl)));
 	}
 }
