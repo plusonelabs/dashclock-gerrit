@@ -1,10 +1,14 @@
 # Gerrit extension for the dashclock Android widget
 
-An extension to the dashclock android widget adding support for the gerrit code review system.
+An extension to the DashClock Android widget which adds support for the gerrit code review system. The extensions allows you to monitor all open changes or changes directly assigned to you.
 
-The extensions allows you to monitor all open changes and changes assigned to you.
+<a href="https://play.google.com/store/apps/details?id=com.plusonelabs.dashclock.gerrit"><img src="http://developer.android.com/images/brand/en_generic_rgb_wo_60.png"/></a>
 
-![Screenshots of gerrit extension for dashclock](https://github.com/plusonelabs/dashclock-gerrit/raw/master/assets/screenshots/dashclock-gerrit-device.png)
+## Screenshots
+
+<p align="center">
+  <img src="https://github.com/plusonelabs/dashclock-gerrit/raw/master/assets/screenshots/dashclock-gerrit-device.png"/>
+</p>
 
 ## Collaboration
 
