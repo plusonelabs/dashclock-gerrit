@@ -12,6 +12,14 @@ We are developing this application in public to bring you a tool that you want t
 
 ## Changelog
 
+### 1.0.1
+
+https://github.com/plusonelabs/dashclock-gerrit/issues?milestone=1
+
+* When the extension shows multiple open changes tapping brings you directly to the open changes screen
+* Added colored launcher icon
+* Improved security (requires to reenter your credentials)
+
 ### 1.0
 
 * Initial release
