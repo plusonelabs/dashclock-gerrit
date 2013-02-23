@@ -43,15 +43,15 @@ public class GerritPreferences {
 			SecretKey key = generateKey();
 			if (key != null) {
 				String generatedKey = Base64.encodeToString(key.getEncoded(), Base64.DEFAULT);
-				securePreferencesKey = generatedKey + DEFAULT_SECURE_PREFERENCES_KEY;
+				securePreferencesKey = generatedKey;
 				SharedPreferences prefs = getSharedPreferences(context);
 				prefs.edit().putString(SECURE_KEY, securePreferencesKey).commit();
 			}
 		}
 		if (securePreferencesKey == null) {
-			securePreferencesKey = DEFAULT_SECURE_PREFERENCES_KEY;
+			return DEFAULT_SECURE_PREFERENCES_KEY;
 		}
-		return securePreferencesKey;
+		return securePreferencesKey + DEFAULT_SECURE_PREFERENCES_KEY;
 	}
 
 	public static SharedPreferences getSharedPreferences(Context context) {
