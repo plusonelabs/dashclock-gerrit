@@ -12,9 +12,15 @@ We are developing this application in public to bring you a tool that you want t
 
 ## Changelog
 
+### 1.1
+
+https://github.com/plusonelabs/dashclock-gerrit/issues?milestone=2&state=closed
+
+* Added ability to filter results by branch and project name
+
 ### 1.0.1
 
-https://github.com/plusonelabs/dashclock-gerrit/issues?milestone=1
+https://github.com/plusonelabs/dashclock-gerrit/issues?milestone=1&state=closed
 
 * When the extension shows multiple open changes tapping brings you directly to the open changes screen
 * Added colored launcher icon

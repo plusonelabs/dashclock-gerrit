@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.plusonelabs.dashclock.gerrit"
-    android:versionCode="3"
-    android:versionName="1.0.1" >
+    android:versionCode="4"
+    android:versionName="1.1" >
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -21,7 +21,8 @@
             android:label="@string/settings_activity_title"
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
         </activity>
-        <service
+
+        <service
             android:name=".GerritDashClockExtension"
             android:icon="@drawable/ic_extension_icon"
             android:label="@string/extension_name"
