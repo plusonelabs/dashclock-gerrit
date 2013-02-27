@@ -16,7 +16,8 @@ public class AnonymousAuthenticationProvider implements AuthenticationProvider {
 	}
 
 	@Override
-	public String appendQueryToChangesUrl(String url) {
-		return url;
+	public boolean isAnonymous() {
+		return true;
 	}
+
 }

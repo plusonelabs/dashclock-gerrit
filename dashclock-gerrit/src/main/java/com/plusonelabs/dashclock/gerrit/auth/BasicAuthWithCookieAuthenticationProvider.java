@@ -49,7 +49,7 @@ public class BasicAuthWithCookieAuthenticationProvider implements Authentication
 	}
 
 	@Override
-	public String appendQueryToChangesUrl(String url) {
-		return url += "?q=is:open&q=is:open+reviewer:self";
+	public boolean isAnonymous() {
+		return false;
 	}
 }

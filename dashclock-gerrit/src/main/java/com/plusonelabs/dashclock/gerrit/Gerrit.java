@@ -1,7 +1,7 @@
 package com.plusonelabs.dashclock.gerrit;
 
 import static com.plusonelabs.dashclock.gerrit.util.ParamCheck.*;
-import static com.plusonelabs.dashclock.gerrit.util.UrlUtil.*;
+import static com.plusonelabs.dashclock.gerrit.util.StringUtil.*;
 import static java.util.Collections.*;
 
 import java.util.ArrayList;
@@ -16,9 +16,10 @@ import com.plusonelabs.dashclock.gerrit.auth.AuthenticationProvider;
 
 public class Gerrit {
 
+	private static final String GERRIT_RESPONSE_PREPEND = "\\)\\]\\}\\'\n";
+
 	private final GerritEndpoint server;
 	private final Gson gson;
-	private AuthenticationProvider authenticationProvider;
 	private List<Change> allChanges;
 	private List<Change> assignedChanges;
 
@@ -28,22 +29,23 @@ public class Gerrit {
 		gson = new Gson();
 	}
 
-	public void setAuthenticationProvider(AuthenticationProvider authenticationProvider) {
-		this.authenticationProvider = authenticationProvider;
-	}
-
-	public void fetchChanges() {
-		ensureNotNull(authenticationProvider, AuthenticationProvider.class.getSimpleName());
+	public void fetchChanges(AuthenticationProvider authenticationProvider, String project,
+			String branch) {
+		paramNotNull(authenticationProvider, AuthenticationProvider.class.getSimpleName());
 		authenticationProvider.preRequest(server);
-		HttpRequest request = createRequest();
+		HttpRequest request = createRequest(authenticationProvider, project, branch);
 		authenticationProvider.supplyCredentials(request, server);
 		processRequest(request);
 	}
 
-	private HttpRequest createRequest() {
-		String changesUrl = appendPath(server.getUrl(), "changes/");
-		changesUrl = authenticationProvider.appendQueryToChangesUrl(changesUrl);
-		HttpRequest request = HttpRequest.get(changesUrl);
+	private HttpRequest createRequest(AuthenticationProvider authProvider, String project,
+			String branch) {
+		QueryBuilder queryBuilder = new QueryBuilder(server.getUrl(), authProvider.isAnonymous());
+		queryBuilder.setProject(project);
+		queryBuilder.setBranch(branch);
+		String queryUrl = queryBuilder.createQueryUrl();
+		System.out.println(queryUrl);
+		HttpRequest request = HttpRequest.get(queryUrl);
 		request.acceptGzipEncoding().uncompress(true).trustAllCerts().trustAllHosts();
 		request.accept(HttpRequest.CONTENT_TYPE_JSON);
 		return request;
@@ -68,6 +70,7 @@ public class Gerrit {
 	}
 
 	private void deserializeToChangeLists(JsonArray jsonArray) {
+		System.out.println(jsonArray);
 		if (jsonArray.get(0).isJsonObject()) {
 			allChanges = toChangesList(jsonArray);
 			assignedChanges = emptyList();
@@ -86,9 +89,8 @@ public class Gerrit {
 		return result;
 	}
 
-	private String sanatizeResponse(String body) {
-		body = body.replaceFirst("\\)\\]\\}\\'\n", "");
-		return body;
+	private String sanatizeResponse(String gerritResponse) {
+		return gerritResponse.replaceFirst(GERRIT_RESPONSE_PREPEND, EMPTY_STRING);
 	}
 
 	public List<Change> getAllChanges() {

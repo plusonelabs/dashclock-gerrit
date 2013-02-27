@@ -2,6 +2,7 @@ package com.plusonelabs.dashclock.gerrit;
 
 import static android.content.Intent.*;
 import static com.plusonelabs.dashclock.gerrit.prefs.GerritPreferences.*;
+import static com.plusonelabs.dashclock.gerrit.util.StringUtil.*;
 import static com.plusonelabs.dashclock.gerrit.util.UrlUtil.*;
 
 import java.util.List;
@@ -34,7 +35,6 @@ public class GerritDashClockExtension extends DashClockExtension {
 	@Override
 	protected void onUpdateData(int reason) {
 		try {
-			setupGerritAuthentication();
 			publishGerritState();
 		} catch (Exception e) {
 			if (BuildConfig.DEBUG) {
@@ -44,43 +44,40 @@ public class GerritDashClockExtension extends DashClockExtension {
 		}
 	}
 
-	private void setupGerritAuthentication() {
-		AuthenticationProvider authenticationProvider = null;
-		if (endpoint.getUsername() == null) {
-			authenticationProvider = new AnonymousAuthenticationProvider();
-		} else {
-			authenticationProvider = new BasicAuthWithCookieAuthenticationProvider();
-		}
-		gerrit.setAuthenticationProvider(authenticationProvider);
-	}
-
 	private void publishGerritState() {
 		ExtensionData extensionData = new ExtensionData();
 		extensionData.visible(false);
 		if (endpoint.getUrl() != null) {
-			fetchFromGerrit(extensionData);
+			fetchFromGerrit();
+			updateStatus(extensionData);
 		}
 		publishUpdate(extensionData);
 	}
 
-	private void fetchFromGerrit(ExtensionData extensionData) {
-		gerrit.fetchChanges();
-		String numberOfChanges = createQuantitiyString(gerrit.getAllChanges(),
-				R.plurals.numberOfChanges);
-		String numberOfAssignedChanges = createQuantitiyString(gerrit.getAssignedChanges(),
-				R.plurals.numberOfAssignedChanges);
-		setStatus(extensionData, numberOfChanges, numberOfAssignedChanges);
+	private void fetchFromGerrit() {
+		SharedPreferences prefs = GerritPreferences.getSharedPreferences(getApplicationContext());
+		String project = prefs.getString(GerritPreferences.DISPLAY_FILTER_PROJECT, null);
+		String branch = prefs.getString(GerritPreferences.DISPLAY_FILTER_BRANCH, null);
+		gerrit.fetchChanges(createAuthenticationProvider(), project, branch);
 	}
 
-	private void setStatus(ExtensionData extensionData, String numberOfChanges,
-			String numberOfAssignedChanges) {
+	private AuthenticationProvider createAuthenticationProvider() {
+		if (hasContent(endpoint.getUsername())) {
+			return new BasicAuthWithCookieAuthenticationProvider();
+		}
+		return new AnonymousAuthenticationProvider();
+	}
+
+	private void updateStatus(ExtensionData extensionData) {
 		SharedPreferences prefs = GerritPreferences.getSharedPreferences(getApplicationContext());
+		String total = createQuantitiy(gerrit.getAllChanges(), R.plurals.changes);
+		String assigned = createQuantitiy(gerrit.getAssignedChanges(), R.plurals.assignedChanges);
 		String changesScope = prefs.getString(DISPLAY_CHANGES_SCOPE, DISPLAY_CHANGES_SCOPE_ALL);
 		if (changesScope.equals(DISPLAY_CHANGES_SCOPE_ALL) && !gerrit.getAllChanges().isEmpty()) {
-			setAllChangesDetails(extensionData, numberOfChanges, numberOfAssignedChanges);
+			setAllChangesDetails(extensionData, total, assigned);
 		} else if (changesScope.equals(DISPLAY_CHANGES_SCOPE_ASSIGNED)
 				&& !gerrit.getAssignedChanges().isEmpty()) {
-			setAssignedChangesDetails(extensionData, numberOfChanges, numberOfAssignedChanges);
+			setAssignedChangesDetails(extensionData, total, assigned);
 		}
 	}
 
@@ -100,7 +97,7 @@ public class GerritDashClockExtension extends DashClockExtension {
 		setClickIntent(gerrit.getAllChanges(), extensionData);
 	}
 
-	private String createQuantitiyString(List<Change> changes, int plural) {
+	private String createQuantitiy(List<Change> changes, int plural) {
 		Resources res = getResources();
 		int changesCount = changes.size();
 		return res.getQuantityString(plural, changesCount, changesCount);

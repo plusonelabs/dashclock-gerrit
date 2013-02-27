@@ -19,6 +19,8 @@ public class GerritPreferences {
 	public static final String DISPLAY_CHANGES_SCOPE = "display_scope";
 	public static final String DISPLAY_CHANGES_SCOPE_ALL = "display_scope_all";
 	public static final String DISPLAY_CHANGES_SCOPE_ASSIGNED = "display_scope_assigned";
+	public static final String DISPLAY_FILTER_PROJECT = "display_filter_project";
+	public static final String DISPLAY_FILTER_BRANCH = "display_filter_branch";
 
 	private static final String SECURE_KEY = "secure_key";
 	private static final String DEFAULT_SECURE_PREFERENCES_KEY = "v7Ja53ezpxgNxBPgeCQwVuoqFA9AK4ea";

@@ -9,6 +9,6 @@ public interface AuthenticationProvider {
 
 	void supplyCredentials(HttpRequest request, GerritEndpoint endpoint);
 
-	String appendQueryToChangesUrl(String url);
+	boolean isAnonymous();
 
 }

@@ -7,23 +7,25 @@
     <string name="extension_description">Displays the number of open changes from a gerrit system.</string>
 
     <!-- Change visualization -->
-    <plurals name="numberOfChanges">
+    <plurals name="changes">
         <item quantity="one">1 open change</item>
         <item quantity="other">%d open changes</item>
     </plurals>
-    <plurals name="numberOfAssignedChanges">
+    <plurals name="assignedChanges">
         <item quantity="zero">None assigned to you</item>
         <item quantity="other">%d assigned to you</item>
     </plurals>
 
     <!-- Settings -->
     <string name="settings_server">Gerrit Server</string>
-    <string name="settings_server_summary">Connection details of the gerrit server.</string>
+    <string name="settings_server_summary">Connection details of the gerrit server</string>
     <string name="settings_display">Display Options</string>
-    <string name="settings_display_summary">Specify what gerrit changes to display.</string>
+    <string name="settings_display_summary">Specify what gerrit changes to display</string>
     <string name="settings_about">About</string>
-    <string name="settings_about_summary">Find out more about the gerrit extension.</string>
+    <string name="settings_about_summary">Find out more about the gerrit extension</string>
     <string name="settings_activity_title">Gerrit Extension Settings</string>
+
+    <!-- Server -->
     <string name="settings_server_section_server">Server</string>
     <string name="settings_server_server_url_hint">Server URL</string>
     <string name="settings_server_section_credentials">Credentials</string>
@@ -31,9 +33,19 @@
     <string name="settings_server_password_hint">Password</string>
     <string name="settings_server_authentication_description">Only basic authentication with cookies is supported. Leave blank for anonymous access.</string>
     <string name="settings_server_check_connection">Check Connection</string>
-    <string name="settings_display_scope_title">Changes Scope</string>
-    <string name="settings_display_scope_dialog_title">Changes Scope</string>
-    <string name="settings_display_scope_summary">What changes to display</string>
+
+    <!-- Display -->
+    <string name="settings_display_scope_title">Scope of Changes</string>
+    <string name="settings_display_scope_dialog_title">Scope of Changes</string>
+    <string name="settings_display_scope_summary">Display all changes or changes assigned to me</string>
+    <string name="settings_display_project_title">By Project</string>
+    <string name="settings_display_project_summary">Only show changes from the specified project</string>
+    <string name="settings_display_project_dialog_title">Project name to filter by</string>
+    <string name="settings_display_branch_title">By Branch</string>
+    <string name="settings_display_branch_summary">Only show changes from the specified branch</string>
+    <string name="settings_display_branch_dialog_title">Branch name to filter by</string>
+
+    <!-- About -->
     <string name="settings_about_category_contact_title">Contact</string>
     <string name="settings_about_github_title">Project on GitHub</string>
     <string name="settings_about_github_summary">Provide feedback on the project GitHub page</string>
@@ -44,5 +56,6 @@
     <string name="settings_about_library_http_request_title">Http Request</string>
     <string name="settings_about_library_dashclock_title">DashClock API</string>
     <string name="settings_about_library_encrypted_prefs_title">Encrypted Userprefs</string>
+    <string name="settings_display_category_filter">Filter</string>
 
 </resources>
