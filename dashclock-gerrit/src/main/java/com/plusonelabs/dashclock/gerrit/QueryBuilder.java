@@ -11,6 +11,7 @@ public class QueryBuilder {
 	private final boolean anonymous;
 	private String branch;
 	private String project;
+	private String reviewer;
 
 	public QueryBuilder(String baseUrl, boolean anonymous) {
 		paramNotNull(baseUrl, "baseUrl");
@@ -26,6 +27,10 @@ public class QueryBuilder {
 		this.branch = branch;
 	}
 
+	public void setReviewer(String reviewer) {
+		this.reviewer = reviewer;
+	}
+
 	public String createQueryUrl() {
 		String queryUrl = UrlUtil.appendPath(baseUrl, "changes/?");
 		queryUrl += createQueryChanges();
@@ -33,6 +38,10 @@ public class QueryBuilder {
 			queryUrl += "&";
 			queryUrl += createQueryChanges();
 			queryUrl += "+reviewer:self";
+		} else if (hasContent(reviewer)) {
+			queryUrl += "&";
+			queryUrl += createQueryChanges();
+			queryUrl += "+reviewer:" + reviewer;
 		}
 		return queryUrl;
 	}
