@@ -44,6 +44,9 @@
     <string name="settings_display_branch_title">By Branch</string>
     <string name="settings_display_branch_summary">Only show changes from the specified branch</string>
     <string name="settings_display_branch_dialog_title">Branch name to filter by</string>
+    <string name="settings_reviewer_title">Reviewer email address</string>
+    <string name="settings_reviewer_summary">Set your reviewer email address used to get assigned changes</string>
+    <string name="settings_reviewer_dialog_title">Reviewer email address to use</string>
 
     <!-- About -->
     <string name="settings_about_category_contact_title">Contact</string>

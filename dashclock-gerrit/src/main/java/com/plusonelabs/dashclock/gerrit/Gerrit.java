@@ -7,6 +7,7 @@ import static java.util.Collections.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.util.Log;
 import com.github.kevinsawicki.http.HttpRequest;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -27,22 +28,25 @@ public class Gerrit {
 		paramNotNull(server, GerritEndpoint.class.getSimpleName());
 		this.server = server;
 		gson = new Gson();
+		allChanges = emptyList();
+		assignedChanges = emptyList();
 	}
 
 	public void fetchChanges(AuthenticationProvider authenticationProvider, String project,
-			String branch) {
+			String branch, String reviewer) {
 		paramNotNull(authenticationProvider, AuthenticationProvider.class.getSimpleName());
 		authenticationProvider.preRequest(server);
-		HttpRequest request = createRequest(authenticationProvider, project, branch);
+		HttpRequest request = createRequest(authenticationProvider, project, branch, reviewer);
 		authenticationProvider.supplyCredentials(request, server);
 		processRequest(request);
 	}
 
 	private HttpRequest createRequest(AuthenticationProvider authProvider, String project,
-			String branch) {
+			String branch, String reviewer) {
 		QueryBuilder queryBuilder = new QueryBuilder(server.getUrl(), authProvider.isAnonymous());
 		queryBuilder.setProject(project);
 		queryBuilder.setBranch(branch);
+		queryBuilder.setReviewer(reviewer);
 		String queryUrl = queryBuilder.createQueryUrl();
 		System.out.println(queryUrl);
 		HttpRequest request = HttpRequest.get(queryUrl);
@@ -55,6 +59,11 @@ public class Gerrit {
 		if (request.ok()) {
 			String json = sanatizeResponse(request.body());
 			deserializeToChanges(json);
+		} else {
+			if (BuildConfig.DEBUG) {
+				Log.e(GerritDashClockExtension.class.getSimpleName(),
+						"A problem occurred while populating the gerrit changes: " + request.message());
+			}
 		}
 	}
 

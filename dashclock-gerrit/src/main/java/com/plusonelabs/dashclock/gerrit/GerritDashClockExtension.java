@@ -58,7 +58,8 @@ public class GerritDashClockExtension extends DashClockExtension {
 		SharedPreferences prefs = GerritPreferences.getSharedPreferences(getApplicationContext());
 		String project = prefs.getString(GerritPreferences.DISPLAY_FILTER_PROJECT, null);
 		String branch = prefs.getString(GerritPreferences.DISPLAY_FILTER_BRANCH, null);
-		gerrit.fetchChanges(createAuthenticationProvider(), project, branch);
+		String reviewer = prefs.getString(GerritPreferences.DISPLAY_REVIEWER, null);
+		gerrit.fetchChanges(createAuthenticationProvider(), project, branch, reviewer);
 	}
 
 	private AuthenticationProvider createAuthenticationProvider() {
