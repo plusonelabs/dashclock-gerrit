@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.util.Log;
+
 import com.github.kevinsawicki.http.HttpRequest;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -48,7 +49,6 @@ public class Gerrit {
 		queryBuilder.setBranch(branch);
 		queryBuilder.setReviewer(reviewer);
 		String queryUrl = queryBuilder.createQueryUrl();
-		System.out.println(queryUrl);
 		HttpRequest request = HttpRequest.get(queryUrl);
 		request.acceptGzipEncoding().uncompress(true).trustAllCerts().trustAllHosts();
 		request.accept(HttpRequest.CONTENT_TYPE_JSON);
@@ -62,9 +62,14 @@ public class Gerrit {
 		} else {
 			if (BuildConfig.DEBUG) {
 				Log.e(GerritDashClockExtension.class.getSimpleName(),
-						"A problem occurred while populating the gerrit changes: " + request.message());
+						"A problem occurred while populating the gerrit changes: "
+								+ request.message());
 			}
 		}
+	}
+
+	private String sanatizeResponse(String gerritResponse) {
+		return gerritResponse.replaceFirst(GERRIT_RESPONSE_PREPEND, EMPTY_STRING);
 	}
 
 	private void deserializeToChanges(String json) {
@@ -79,7 +84,6 @@ public class Gerrit {
 	}
 
 	private void deserializeToChangeLists(JsonArray jsonArray) {
-		System.out.println(jsonArray);
 		if (jsonArray.get(0).isJsonObject()) {
 			allChanges = toChangesList(jsonArray);
 			assignedChanges = emptyList();
@@ -96,10 +100,6 @@ public class Gerrit {
 			result.add(change);
 		}
 		return result;
-	}
-
-	private String sanatizeResponse(String gerritResponse) {
-		return gerritResponse.replaceFirst(GERRIT_RESPONSE_PREPEND, EMPTY_STRING);
 	}
 
 	public List<Change> getAllChanges() {
